@@ -6,9 +6,7 @@
       @previousMonth="previousMonth"
       @nextMonth="nextMonth"
     />
-    <div class="weekday-wrapper">
-      <WeekDay v-for="weekDay in weekdayName" :key="weekDay" :title="weekDay" />
-    </div>
+    <Month :month="selectedMonth" :year="selectedYear" />
   </div>
 </template>
 <script>
@@ -18,9 +16,8 @@ export default {
 </script>
 <script setup>
 import { ref } from "vue";
-import { weekdayName } from "../datepicker";
-import WeekDay from "./weekDay/WeekDay.vue";
 import Navigation from "./Navigation.vue";
+import Month from "./month/Month.vue";
 
 const props = defineProps({
   month: {
@@ -57,10 +54,3 @@ const nextMonth = () => {
   }
 };
 </script>
-<style scoped>
-.weekday-wrapper {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  padding: 3px;
-}
-</style>

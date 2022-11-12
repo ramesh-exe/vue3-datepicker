@@ -74,7 +74,7 @@ defineProps({
   background-color: transparent;
   border: unset;
   cursor: pointer;
-  padding: 10px;
+  padding: 12px;
 }
 .month-year-wrapper {
   display: flex;
