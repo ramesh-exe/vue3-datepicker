@@ -6,7 +6,12 @@
       @previousMonth="previousMonth"
       @nextMonth="nextMonth"
     />
-    <Month :month="selectedMonth" :year="selectedYear" />
+    <Month
+      :month="selectedMonth"
+      :year="selectedYear"
+      :selectedDateRange="selectedDateRange"
+      @selectedDate="selectedDate"
+    />
   </div>
 </template>
 <script>
@@ -32,6 +37,12 @@ const props = defineProps({
 
 const selectedMonth = ref(props.month);
 const selectedYear = ref(props.year);
+const selectedDateRange = ref({ start: null, end: null });
+
+// gets selected date from Month component.
+const selectedDate = (date) => {
+  selectedDateRange.value = { start: date, end: date };
+};
 
 const previousMonth = () => {
   const currentMonth = selectedMonth.value;

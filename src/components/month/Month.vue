@@ -5,7 +5,13 @@
     </div>
     <div v-for="week in weeks" :key="week" class="weeks-wrapper">
       <div v-for="day in week" :key="day" class="day-wrapper">
-        {{ day }}
+        <Day
+          v-if="day"
+          :key="day"
+          :day="day"
+          :selected="isSelected(datesRange, day)"
+          @click="selectedDate"
+        />
       </div>
     </div>
   </div>
@@ -17,8 +23,16 @@ export default {
 </script>
 <script setup>
 import { computed } from "vue";
-import { weekdayName, getWeeksForMonth } from "../../datepicker";
+import {
+  weekdayName,
+  getWeeksForMonth,
+  isSelected,
+  getDatesInRange,
+} from "../../datepicker";
 import WeekDay from "../weekDay/WeekDay.vue";
+import Day from "../day/Day.vue";
+
+const emit = defineEmits(["selectedDate"]);
 
 const props = defineProps({
   month: {
@@ -29,9 +43,18 @@ const props = defineProps({
     type: Number,
     default: 0,
   },
+  selectedDateRange: {
+    type: Object,
+    default: null,
+  },
 });
 
+const selectedDate = (date) => {
+  emit("selectedDate", date);
+};
+
 const weeks = computed(() => getWeeksForMonth(props.month, props.year, 0));
+const datesRange = computed(() => getDatesInRange(props.selectedDateRange));
 </script>
 <style scoped>
 .weekday-wrapper {

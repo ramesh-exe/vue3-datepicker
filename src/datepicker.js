@@ -53,4 +53,33 @@ export const getWeeksForMonth = (month, year, weekStartsOn = 0) => {
     }
     return weeks
 }
+
+export const isSameDay = (day1, day2) => {
+    if (day1 && day2) {
+      return (
+        day1.getDate() === day2.getDate() &&
+        day1.getMonth() === day2.getMonth() &&
+        day1.getFullYear() === day2.getFullYear()
+      )
+    }
+    return false
+}
+
+export const isSelected = (dateRange, date) => {
+    return dateRange.find(day => day.getTime() === date.getTime()) ? true : false
+}
+
+export const getDatesInRange = selectedDateRange => {
+    const dates = []
+    const start = selectedDateRange?.start
+    const end = selectedDateRange?.end
+    if (start && end) {
+      const date = new Date(start.getTime())
+      while (date <= end) {
+        dates.push(new Date(date))
+        date.setDate(date.getDate() + 1)
+      }
+    }
+    return dates
+}
   
