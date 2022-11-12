@@ -24,6 +24,8 @@ import { ref } from "vue";
 import Navigation from "./Navigation.vue";
 import Month from "./month/Month.vue";
 
+const emit = defineEmits(["update:modelValue"]);
+
 const props = defineProps({
   month: {
     type: Number,
@@ -32,6 +34,10 @@ const props = defineProps({
   year: {
     type: Number,
     default: new Date().getFullYear(),
+  },
+  modelValue: {
+    type: Object,
+    default: null,
   },
 });
 
@@ -42,6 +48,7 @@ const selectedDateRange = ref({ start: null, end: null });
 // gets selected date from Month component.
 const selectedDate = (date) => {
   selectedDateRange.value = { start: date, end: date };
+  emit("update:modelValue", selectedDateRange.value);
 };
 
 const previousMonth = () => {

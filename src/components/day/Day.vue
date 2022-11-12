@@ -33,7 +33,7 @@ const selectDate = () => {
 
 const classes = computed(() => ({
   day: true,
-  today: today.value,
+  today: today.value && !props.selected,
   selected: props.selected,
 }));
 </script>
@@ -44,8 +44,11 @@ const classes = computed(() => ({
   cursor: pointer;
   padding: 12px;
   border-radius: 10px;
+  width: 100%;
+  height: 100%;
 }
 .today {
+  border-width: 1px;
   border-style: solid;
   border-color: blue;
 }
