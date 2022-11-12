@@ -6,9 +6,12 @@
       @previousMonth="previousMonth"
       @nextMonth="nextMonth"
     />
-    <div class="weekday-wrapper">
-      <WeekDay v-for="weekDay in weekdayName" :key="weekDay" :title="weekDay" />
-    </div>
+    <Month
+      :month="selectedMonth"
+      :year="selectedYear"
+      :selectedDateRange="selectedDateRange"
+      @selectedDate="selectedDate"
+    />
   </div>
 </template>
 <script>
@@ -18,9 +21,10 @@ export default {
 </script>
 <script setup>
 import { ref } from "vue";
-import { weekdayName } from "../datepicker";
-import WeekDay from "./weekDay/WeekDay.vue";
 import Navigation from "./Navigation.vue";
+import Month from "./month/Month.vue";
+
+const emit = defineEmits(["update:modelValue"]);
 
 const props = defineProps({
   month: {
@@ -31,10 +35,21 @@ const props = defineProps({
     type: Number,
     default: new Date().getFullYear(),
   },
+  modelValue: {
+    type: Object,
+    default: null,
+  },
 });
 
 const selectedMonth = ref(props.month);
 const selectedYear = ref(props.year);
+const selectedDateRange = ref({ start: null, end: null });
+
+// gets selected date from Month component.
+const selectedDate = (date) => {
+  selectedDateRange.value = { start: date, end: date };
+  emit("update:modelValue", selectedDateRange.value);
+};
 
 const previousMonth = () => {
   const currentMonth = selectedMonth.value;
@@ -57,10 +72,3 @@ const nextMonth = () => {
   }
 };
 </script>
-<style scoped>
-.weekday-wrapper {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  padding: 3px;
-}
-</style>
