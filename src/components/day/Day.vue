@@ -22,6 +22,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  showToday: {
+    type: Boolean,
+    default: true,
+  },
 });
 
 const today = ref(isSameDay(new Date(), props.day));
@@ -33,7 +37,7 @@ const selectDate = () => {
 
 const classes = computed(() => ({
   day: true,
-  today: today.value && !props.selected,
+  today: today.value && !props.selected && props.showToday,
   selected: props.selected,
 }));
 </script>
@@ -50,10 +54,10 @@ const classes = computed(() => ({
 .today {
   border-width: 1px;
   border-style: solid;
-  border-color: blue;
+  border-color: #3b82f6;
 }
 .selected {
-  background-color: blue;
+  background-color: #3b82f6;
   color: white;
 }
 </style>

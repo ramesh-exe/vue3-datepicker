@@ -10,6 +10,7 @@
           :key="day"
           :day="day"
           :selected="isSelected(datesRange, day)"
+          :showToday="showToday"
           @click="selectedDate"
         />
       </div>
@@ -42,6 +43,10 @@ const props = defineProps({
   year: {
     type: Number,
     default: 0,
+  },
+  showToday: {
+    type: Boolean,
+    default: true,
   },
   selectedDateRange: {
     type: Object,
