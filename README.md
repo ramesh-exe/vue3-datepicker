@@ -1,24 +1,8 @@
-# vue3-datepicker
+## @ramesh-exe/vue3-datepicker
 
-## Project setup
-```
-yarn install
-```
+### Clean and simple datepicker for vue3 insipired by shopify.
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+## Features
 
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Run your unit tests
-```
-yarn test:unit
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- Single date picker
+- Range date picker - coming soon
