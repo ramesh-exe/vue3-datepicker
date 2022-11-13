@@ -10,6 +10,7 @@
       :month="selectedMonth"
       :year="selectedYear"
       :selectedDateRange="selectedDateRange"
+      :showToday="showToday"
       @selectedDate="selectedDate"
     />
   </div>
@@ -34,6 +35,10 @@ const props = defineProps({
   year: {
     type: Number,
     default: new Date().getFullYear(),
+  },
+  showToday: {
+    type: Boolean,
+    default: true,
   },
   modelValue: {
     type: Object,
